@@ -1,0 +1,24 @@
+import type { ColumnDef } from "@tanstack/table-core";
+ 
+
+export type Category_Asset = {
+ id: string;
+ amount: number;
+ status: "pending" | "processing" | "success" | "failed";
+ email: string;
+};
+ 
+export const columns: ColumnDef<Payment>[] = [
+ {
+  accessorKey: "status",
+  header: "Status",
+ },
+ {
+  accessorKey: "email",
+  header: "Email",
+ },
+ {
+  accessorKey: "amount",
+  header: "Amount",
+ },
+];
