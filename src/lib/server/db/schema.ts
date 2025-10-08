@@ -17,3 +17,10 @@ export const session = sqliteTable('session', {
 		.references(() => user.id),
 	expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull()
 });
+
+export const categoryAsset = sqliteTable('category_Asset', {
+	id: integer('id').primaryKey(),
+	name: text("name").unique().notNull(),
+	createdAt: integer("created_at", { mode: "timestamp"}).$defaultFn(() => new Date(Date.now())),
+	updatedAt: integer("update_At", { mode: "timestamp"}).$defaultFn(() => new Date(Date.now())),
+});
