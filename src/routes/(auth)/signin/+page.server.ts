@@ -3,7 +3,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { eq, or } from 'drizzle-orm';
 import * as auth from '$lib/server/auth';
 import { db } from '$lib/server/db';
-import { user } from '$lib/server/db/schema';
+import { users } from '$lib/server/db/schema';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
@@ -19,14 +19,14 @@ export const actions: Actions = {
 		// cari user berdasarkan username atau email
 		const [existingUser] = await db
 			.select({
-				id: user.id,
-				username: user.username,
-				email: user.email,
-				passwordHash: user.passwordHash
+				id: users.id,
+				username: users.username,
+				email: users.email,
+				passwordHash: users.passwordHash
 			})
-			.from(user)
+			.from(users)
 			.where(
-				or(eq(user.username, identifier.toLowerCase()), eq(user.email, identifier.toLowerCase()))
+				or(eq(users.username, identifier.toLowerCase()), eq(users.email, identifier.toLowerCase()))
 			);
 
 		if (!existingUser) {

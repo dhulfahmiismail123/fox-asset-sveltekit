@@ -33,7 +33,6 @@
 
 <script lang="ts">
 	import SearchForm from './search-form.svelte';
-	import VersionSwitcher from './version-switcher.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import type { ComponentProps } from 'svelte';
 
@@ -42,7 +41,6 @@
 
 <Sidebar.Root {...restProps} bind:ref>
 	<Sidebar.Header>
-		<VersionSwitcher versions={data.versions} defaultVersion={data.versions[0]} />
 		<SearchForm />
 	</Sidebar.Header>
 	<Sidebar.Content>

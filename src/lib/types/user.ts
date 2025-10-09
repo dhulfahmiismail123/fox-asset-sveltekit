@@ -1,4 +1,4 @@
-import { user, session } from "$lib/server/db/schema";
+import { users, sessions } from "$lib/server/db/schema";
 
-export type Session = typeof session.$inferInsert;
-export type User = typeof user.$inferInsert;
+export type Sessions = typeof sessions.$inferInsert;
+export type Users = typeof users.$inferInsert;

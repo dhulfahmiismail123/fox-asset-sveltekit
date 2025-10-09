@@ -1,3 +1,3 @@
-import { categoryAsset } from "$lib/server/db/schema"
+import { assetCategories } from "$lib/server/db/schema"
 
-export type CategoryAsset = typeof categoryAsset.$inferInsert
+export type AssetCategories = typeof assetCategories.$inferInsert

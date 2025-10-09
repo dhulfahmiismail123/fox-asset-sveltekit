@@ -1,6 +1,6 @@
 import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core';
 
-export const user = sqliteTable('user', {
+export const users = sqliteTable('users', {
 	id: text('id').primaryKey(),
 	name: text('name').notNull(),
 	username: text('username').notNull().unique(),
@@ -10,15 +10,15 @@ export const user = sqliteTable('user', {
 	updatedAt: integer("update_At", { mode: "timestamp"}).$defaultFn(() => new Date(Date.now())),
 });
 
-export const session = sqliteTable('session', {
+export const sessions = sqliteTable('sessions', {
 	id: text('id').primaryKey(),
 	userId: text('user_id')
 		.notNull()
-		.references(() => user.id),
+		.references(() => users.id),
 	expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull()
 });
 
-export const categoryAsset = sqliteTable('category_Asset', {
+export const assetCategories = sqliteTable('asset_categories', {
 	id: integer('id').primaryKey(),
 	name: text("name").unique().notNull(),
 	createdAt: integer("created_at", { mode: "timestamp"}).$defaultFn(() => new Date(Date.now())),

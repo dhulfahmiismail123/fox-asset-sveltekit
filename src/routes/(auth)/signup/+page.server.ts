@@ -2,10 +2,10 @@ import { hash } from '@node-rs/argon2';
 import { encodeBase32LowerCase } from '@oslojs/encoding';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
-import { user } from '$lib/server/db/schema';
+import { users } from '$lib/server/db/schema';
 import { eq, or } from 'drizzle-orm';
 import type { Actions } from '@sveltejs/kit';
-import type { User } from '$lib/types';
+import type { Users } from '$lib/types';
 
 export const actions: Actions = {
 	default: async (event) => {
@@ -29,9 +29,9 @@ export const actions: Actions = {
 		}
 
 		const existingUser = await db
-			.select({ id: user.id })
-			.from(user)
-			.where(or(eq(user.username, username as string), eq(user.email, email)));
+			.select({ id: users.id })
+			.from(users)
+			.where(or(eq(users.username, username as string), eq(users.email, email)));
 
 		if (existingUser.length > 0) {
 			return fail(400, { message: 'Username or email already registered' });
@@ -46,13 +46,13 @@ export const actions: Actions = {
 		});
 
 		try {
-			await db.insert(user).values({
+			await db.insert(users).values({
 				id: userId,
 				name,
 				username: username.toLowerCase(),
 				email: email.toLowerCase(),
 				passwordHash
-			} as User);
+			} as Users);
 
 		} catch (err) {
 			console.error('Signup error:', err);
